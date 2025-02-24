@@ -7,4 +7,5 @@ import java.util.ArrayList;
 public interface IProductoService {
     ArrayList<Producto> obtenerTodosProductos();
     Producto obtenerProductoPorId(Long id);
+    Producto crearProducto(Producto p);
 }

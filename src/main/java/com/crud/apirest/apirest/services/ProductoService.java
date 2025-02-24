@@ -40,4 +40,25 @@ public class ProductoService implements IProductoService{
         }
         return new Producto();
     }
+
+    @Override
+    public Producto crearProducto(Producto p) {
+     ArrayList<Producto> productos = this.obtenerTodosProductos();
+     //Crear el ID
+     Long id = 1L; // int id = 1;
+     if (!productos.isEmpty()){
+         id =(long) (productos.size() + 1);
+     }
+     p.setId(id);
+     //EN el Array de Productos (añadir el producto)
+        productos.add(p);
+     //Guardar el JSON (mapear el arrayList en un JSON)
+        try {
+            File archivo = new File(getClass().getClassLoader().getResource(FILE_PATH).toURI());
+            objectMapper.writeValue(archivo,productos);
+        } catch (IOException | URISyntaxException e){
+            throw new RuntimeException(e);
+        }
+        return p;
+    }
 }
